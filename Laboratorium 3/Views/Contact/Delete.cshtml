@@ -1,0 +1,14 @@
+﻿@using Laboratorium_3.Models.ContactModels;
+@model Contact
+
+<h1 class="text-2xl font-bold mb-4">
+    Czy na pewno chcesz usunąć kontakt
+</h1>
+<h3>Imie - @Model.Name</h3>
+<h3>Email - @Model.Email</h3>
+<h3>Telefon - @Model.Phone</h3>
+<form asp-action="Delete" method="post"> 
+    <input asp-for="Id" />
+    <button class="btn bg-red-500 btn-danger" type="submit">Tak</button>
+    <a class="btn btn-secondary" asp-action="Index">Nie</a>
+</form>

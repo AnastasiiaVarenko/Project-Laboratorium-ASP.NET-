@@ -1,0 +1,111 @@
+﻿@using Laboratorium_3.Models;
+@using Laboratorium_3.Models.PostModels;
+
+@model PagingList<Post>
+
+<h1 class="text-2xl font-bold mb-4">Lista postów</h1>
+<a class="bg-blue-500 text-white px-4 py-2 rounded inline-block mb-4 hover:bg-blue-700" asp-controller="Post" asp-action="Create">Utwórz post</a>
+<a class="bg-blue-500 text-white px-4 py-2 rounded inline-block mb-4 hover:bg-blue-700" asp-controller="Post" asp-action="Index">Zwykła witryna</a>
+<a class="bg-blue-500 text-white px-4 py-2 rounded inline-block mb-4 hover:bg-blue-700" asp-controller="Post" asp-action="SearchIndexApi">Wyszukiwarka autorów API</a>
+
+
+
+
+@if (Model.Data.Count() > 0)
+{
+    <table class="min-w-full bg-white border border-gray-300">
+            <thead class="bg-gray-100">
+                 <tr>
+                     <th class="py-2 px-4 border-b">
+                        @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.ContactName)
+                     </th>
+                     <th class="py-2 px-4 border-b">
+                        @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Miasto)
+                     </th>
+                     <th class="py-2 px-4 border-b">
+                        @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.PublicationDate)
+                     </th>
+                     <th class="py-2 px-4 border-b">
+                        @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Content)
+                     </th>
+                     <th class="py-2 px-4 border-b">
+                         Akcje
+                     </th>
+                 </tr>
+            </thead>
+
+
+            <tbody>
+            @foreach (var item in Model.Data)
+            {
+                        <tr>
+                            <td class="py-2 px-4 border-b">
+                                 @item.ContactName
+                            </td>
+                            <td class="py-2 px-4 border-b">
+                                  @item.Miasto
+                            </td>
+                            <td class="py-2 px-4 border-b">
+                                 @item.PublicationDate.ToShortDateString()
+                            </td>
+                            <td class="py-2 px-4 border-b">
+                                 @item.Content
+                            </td>
+                            <td class="py-2 px-4 border-b">
+                                        <a class="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-700" asp-controller="Post" asp-action="Update" asp-route-id="@item.Id">Edytuj</a>
+                                        <a class="bg-green-500 text-white px-4 py-2 rounded mr-2 hover:bg-green-700" asp-controller="Post" asp-action="Details" asp-route-id="@item.Id">Szczególy</a>
+                                        <a class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700" asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                            </td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
+else
+{
+    <p class="mt-4">Nie znaleziono postów.</p>
+}
+
+<nav aria-label="Books page navigation" class="mt-4">
+    <ul class="pagination">
+        @if (Model.IsPrevious)
+        {
+            <li class="page-item">
+                <a class="page-link"
+                   asp-controller="Post"
+                   asp-action="PagedIndex"
+                   asp-route-page="@(Model.Page - 1)"
+                   asp-route-size="@Model.Size">
+                    Poprzednia
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link">Poprzednia</a>
+            </li>
+        }
+        <li class="page-item disabled">
+            <a class="page-link">@Model.Page</a>
+        </li>
+        @if (Model.IsNext)
+        {
+            <li class="page-item">
+                <a class="page-link"
+                   asp-controller="Post"
+                   asp-action="PagedIndex"
+                   asp-route-page="@(Model.Page + 1)"
+                   asp-route-size="@Model.Size">
+                    Następna
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link">Następna</a>
+            </li>
+        }
+    </ul>
+</nav>

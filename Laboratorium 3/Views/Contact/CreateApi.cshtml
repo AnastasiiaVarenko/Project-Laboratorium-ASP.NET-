@@ -1,0 +1,83 @@
+﻿@using Laboratorium_3.Models.ContactModels;
+@using Data.Models;
+@model Contact
+
+<h1 class="text-2xl font-bold mb-4">Dodaj kontakt</h1>
+
+<form asp-controller="Contact" asp-action="CreateApi" method="post">
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+        <span class="text-danger" asp-validation-for="Phone"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Birth"></label>
+        <input class="form-control" asp-for="Birth" />
+        <span asp-validation-for="Birth"></span>
+    </div>
+    <div class="mb-3">
+        
+        <label asp-for="OrganizationId"></label>
+        <input type="text" id="filter" class="form-control-sm" />
+        <br />
+        <select class="form-control" id="OrganizationId"></select>
+        <br />
+        <a class="btn btn-primary" asp-controller="Organization" asp-action="Create">Utworz organizacje</a>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Priority"></label>
+        <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+        <span asp-validation-for="Priority"></span>
+    </div>
+    <div class="mb-3">
+        <button class="btn bg-blue-600 btn-primary" type="submit">Utworz</button>
+    </div>
+</form>
+
+
+@section Scripts{
+    <script>
+        let select = document.getElementById("OrganizationId");
+        let filter = document.getElementById("filter");
+        filter.onchange = function (e) {
+            if (filter.value.lenght == 0) {
+                return;
+            }
+            fetch(`/api/organizations?q=${filter.value}`)
+            .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            throw "no ok, status " + response.status;
+            })
+            .then(json => {
+                select.innerHTML = "";
+                for (let item of json) {
+                    const option = document.createElement('option');
+                    option.setAttribute('value', item.id);
+                    option.innerText = item.name;
+                    select.appendChild(option);
+                }
+            })
+            .catch(e => {
+            console.log('cant get data from api', e);
+            });
+        };
+    </script>
+}
+
+
+
+
+
+

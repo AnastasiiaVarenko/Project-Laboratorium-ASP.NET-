@@ -1,0 +1,83 @@
+﻿@using Laboratorium_3.Models.PostModels;
+@model Post
+
+<form class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md" asp-controller="Post" asp-action="Create" method="post">
+    <h1 class="text-3xl font-bold mb-4 text-center">Edytuj post</h1>
+    <a asp-controller="Reservation" asp-action="Index" class="text-blue-500 text-lg hover:underline flex items-center mb-4">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+         Powrót
+    </a>
+         <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="PublicationDate"></label>
+            <input class="form-input border rounded-md p-2" asp-for="PublicationDate" />
+        <span class="text-red-500 text-xs" asp-validation-for="PublicationDate"></span>
+    </div>
+    <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="Miasto"></label>
+            <input class="form-input border rounded-md p-2" asp-for="Miasto" />
+        <span class="text-red-500 text-xs" asp-validation-for="Miasto"></span>
+    </div>
+
+    <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="Adress"></label>
+            <input class="form-input border rounded-md p-2" asp-for="Adress" />
+        <span class="text-red-500 text-xs" asp-validation-for="Adress"></span>
+    </div>
+
+    <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="AuthorName"></label>
+            <input class="form-input border rounded-md p-2 border rounded-md p-2" asp-for="AuthorName" />
+        <span class="text-red-500 text-xs" asp-validation-for="AuthorName"></span>
+    </div>
+
+    <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="AuthorPhone"></label>
+            <input class="form-input border rounded-md p-2" asp-for="AuthorPhone" />
+        <span class="text-red-500 text-xs" asp-validation-for="AuthorPhone"></span>
+    </div>
+
+    <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="AuthorEmail"></label>
+            <input class="form-input  border rounded-md p-2" asp-for="AuthorEmail" />
+        <span class="text-red-500 text-xs" asp-validation-for="AuthorEmail"></span>
+    </div>
+
+    <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="ContactId"></label>
+            <select class="form-select border rounded-md p-2" asp-for="ContactId" asp-items="@Model.ContactList"></select>
+        <a class="text-blue-500 text-sm hover:underline" asp-controller="Contact" asp-action="Create">Utworz Contact</a>
+    </div>
+
+    <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="Content"></label>
+            <input class="form-input  border rounded-md p-2" asp-for="Content" />
+        <span class="text-red-500 text-xs" asp-validation-for="Content"></span>
+    </div>
+
+    <div class="mb-4">
+        <button class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700" type="submit">Utwórz</button>
+    </div>
+
+    <div class="mb-4">
+        <input type="hidden" class="form-input" asp-for="ContactName" id="ContactName" />
+    </div>
+</form>
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#ContactId').change(function () {
+                var selectedContactId = $(this).val();
+
+                var selectedContact = @Html.Raw(Json.Serialize(Model.ContactList))
+                    .find(contact => contact.value == selectedContactId);
+
+                $('#ContactName').val(selectedContact.text);
+            });
+        });
+    </script>
+}

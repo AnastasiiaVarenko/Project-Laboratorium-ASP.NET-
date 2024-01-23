@@ -1,0 +1,41 @@
+﻿@using Laboratorium_3.Models.ContactModels;
+@using Data.Models;
+
+@model Contact
+
+<h1 class="text-2xl font-bold mb-4">Dodaj kontakt</h1>
+
+<form asp-controller="Contact" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+        <span class="text-danger" asp-validation-for="Phone"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Birth"></label>
+        <input class="form-control" asp-for="Birth" />
+        <span asp-validation-for="Birth"></span>
+    </div>
+    <div class="mb-3">
+        <select class="form-control" asp-for="OrganizationId" asp-items="@Model.OrganizationList"></select>
+        <a class="btn btn-primary" asp-controller="Organization" asp-action="Create">Utworz organizacje</a>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Priority"></label>
+        <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+        <span asp-validation-for="Priority"></span>
+    </div>
+    <div class="mb-3">
+        <button class="btn bg-blue-600 btn-primary" type="submit">Utworz</button>
+    </div>
+</form>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Laboratorium_3</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Laboratorium_3.styles.css" asp-append-version="true" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header>
+        <nav class="bg-white border-b border-gray-200">
+            <div class="container mx-auto flex items-center justify-between py-4">
+                <a class="text-xl font-bold" asp-area="" asp-controller="Home" asp-action="Index">Laboratorium</a>
+                <div class="lg:flex items-center space-x-4">
+                    <a class="text-gray-800" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <a class="text-gray-800" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    <a class="text-gray-800" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
+                    <a class="text-gray-800" asp-area="" asp-controller="Post" asp-action="Index">Post</a>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mx-auto flex-grow">
+        <main class="py-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-t border-gray-200 text-sm text-gray-600 mt-auto">
+        <div class="container mx-auto py-4">
+            &copy; 2023 - Laboratorium_3 - <a class="text-gray-600" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

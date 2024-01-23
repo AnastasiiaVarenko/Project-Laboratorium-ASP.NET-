@@ -1,0 +1,12 @@
+﻿@using Laboratorium_3.Models.ContactModels;
+@model Contact
+
+<h1 class="text-2xl font-bold mb-4">
+    Szczegóły
+</h1>
+<h3>imie - @Model.Name</h3>
+<h3>e-mail - @Model.Email</h3>
+<h3>numer telefonu - @Model.Phone</h3>
+<h3>data urodzenia - @Model.Birth.Value.ToShortDateString()</h3>
+<h3>data tworzenia - @Model.Created</h3>
+<a class="btn btn-primary" asp-action="Index">Powrót</a>

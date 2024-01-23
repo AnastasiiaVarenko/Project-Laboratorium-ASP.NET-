@@ -1,0 +1,33 @@
+﻿@using Laboratorium_3.Models.PostModels;
+@model Post
+
+<div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
+    <h1 class="text-3xl font-bold mb-4">
+        Szczegóły
+    </h1>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Autor: @Model.ContactName</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Data publikacji: @Model.PublicationDate.ToShortDateString()</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Miasto: @Model.Miasto</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Adres: @Model.Adress</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Nazwa pokoju: @Model.AuthorName</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Numer pokoju: @Model.AuthorPhone</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Rozmiar pokoju: @Model.AuthorEmail</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Zawartość: @Model.Content</h3>
+    </div>
+    <a class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700 inline-block mt-4" asp-action="Index">Powrót</a>
+</div>

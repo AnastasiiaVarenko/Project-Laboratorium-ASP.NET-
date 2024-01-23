@@ -1,0 +1,23 @@
+﻿@using Laboratorium_3.Models.PostModels;
+@model Post
+
+<div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
+    <h1 class="text-3xl font-bold mb-4">
+        Czy na pewno chcesz usunąć post?
+    </h1>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Autor: @Model.ContactName</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Data publikacji: @Model.PublicationDate.ToShortDateString()</h3>
+    </div>
+    <div class="mb-2">
+        <h3 class="text-lg font-semibold">Miasto: @Model.Miasto</h3>
+    </div>
+
+    <form asp-action="Delete" method="post" class="mb-4">
+        <input asp-for="Id" type="hidden" />
+        <button class="bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-700 mr-2" type="submit">Tak</button>
+        <a class="bg-gray-500 text-white py-2 px-4 rounded-full hover:bg-gray-700" asp-action="Index">Nie</a>
+    </form>
+</div>
